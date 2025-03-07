@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Booth - Capture</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <h1>Vintage Photo Booth</h1>
+  <p>Capture your elegant photo strip with a custom filter and frame.</p>
+
+  <div class="controls">
+    <label for="filterSelect">Filter:</label>
+    <select id="filterSelect">
+      <option value="none">None</option>
+      <option value="grayscale(100%)">Grayscale</option>
+      <option value="sepia(100%)">Sepia</option>
+      <option value="contrast(150%)">High Contrast</option>
+      <option value="brightness(120%)">Bright</option>
+    </select>
+
+    <label for="frameColor">Frame Color:</label>
+    <input type="color" id="frameColor" value="#E4A6B0">
+
+    <label for="customText">Custom Text:</label>
+    <input type="text" id="customText" placeholder="Your caption here...">
+
+    <button id="startButton">Start Photo Session</button>
+  </div>
+
+  <div style="position: relative; display: inline-block;">
+    <video id="video" autoplay playsinline></video>
+    <div id="countdown"></div>
+  </div>
+
+  <canvas id="stripCanvas"></canvas>
+
+  <a id="downloadLink">Download Your Strip</a>
+
+  <footer>
+    <p>© 2025 Vintage Photo Booth made by Rachael </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

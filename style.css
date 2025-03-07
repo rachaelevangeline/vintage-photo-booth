@@ -1,0 +1,112 @@
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFF7F0; /* Soft Cream */
+  color: #4A4A4A; /* Charcoal Gray */
+  font-family: 'Dancing Script', cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+h1, h2, h3, p {
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Video and Canvas */
+#video {
+  width: 640px;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Countdown */
+#countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #E4A6B0; /* Dusty Rose */
+  color: #FFF;
+  padding: 20px 40px;
+  font-size: 80px;
+  border-radius: 60px;
+  display: none;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Controls */
+.controls {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+button, select, input[type="color"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-family: 'Dancing Script', cursive;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button {
+  background-color: #E4A6B0; /* Dusty Rose */
+  color: #FFF;
+}
+
+button:hover {
+  background-color: #8C5B68; /* Deep Mauve */
+}
+
+select, input[type="color"] {
+  background-color: #FFF;
+  border: 2px solid #E4A6B0;
+}
+
+/* Canvas (Photo Strip) */
+#stripCanvas {
+  margin-top: 30px;
+  border-radius: 20px;
+  background-color: #FFF;
+  padding: 10px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+  border: 6px solid #E4A6B0; /* Frame color preview */
+}
+
+/* Download link */
+#downloadLink {
+  display: block;
+  margin: 30px 0;
+  padding: 12px 30px;
+  background-color: #E4A6B0;
+  color: #FFF;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 40px;
+  transition: background-color 0.3s ease;
+}
+
+#downloadLink:hover {
+  background-color: #8C5B68;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 20px 0;
+  font-size: 18px;
+  color: #8C5B68;
+}
