@@ -8,6 +8,9 @@ const downloadLink = document.getElementById('downloadLink');
 const startButton = document.getElementById('startButton');
 const customTextInput = document.getElementById('customText');
 
+// Camera shutter sound effect
+const shutterSound = new Audio('camera-click.mp3');
+
 const photoWidth = 320;
 const photoHeight = 240;
 const padding = 20;
@@ -32,18 +35,22 @@ startButton.onclick = async () => {
   const filter = filterSelect.value;
   const customText = customTextInput.value;
 
-  // Clear the canvas with frame color
+  // Clear canvas and apply frame color
   ctx.fillStyle = frameColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Add beautiful frame border
+  // Add Polaroid border effect
   ctx.strokeStyle = '#E4A6B0';
   ctx.lineWidth = 8;
   ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-  // Capture 3 photos with countdown
+  // Capture 3 photos with countdown and click sound
   for (let i = 0; i < 3; i++) {
     await countdown(3);
+
+    // Play camera shutter sound 📸🔊
+    shutterSound.currentTime = 0;
+    shutterSound.play();
 
     const yOffset = framePadding + i * (photoHeight + padding);
 
@@ -53,10 +60,10 @@ startButton.onclick = async () => {
 
     ctx.save();
 
-    // Apply filter and capture image
+    // *** Apply filter and capture image ***
     ctx.filter = filter;
 
-    // Calculate perfect aspect ratio
+    // Calculate aspect ratio without stretching
     const aspectRatio = video.videoWidth / video.videoHeight;
     const targetAspectRatio = photoWidth / photoHeight;
 
@@ -73,7 +80,7 @@ startButton.onclick = async () => {
       sy = (video.videoHeight - sHeight) / 2;
     }
 
-    // Draw the image on canvas
+    // Draw the photo with filter effect applied
     ctx.drawImage(video, sx, sy, sWidth, sHeight, framePadding, yOffset, photoWidth, photoHeight);
     ctx.restore();
   }
@@ -83,7 +90,7 @@ startButton.onclick = async () => {
   ctx.font = '24px "Dancing Script", cursive';
   ctx.fillText(customText, canvas.width / 2 - ctx.measureText(customText).width / 2, canvas.height - 30);
 
-  // Prepare downloadable strip
+  // Generate download button
   prepareDownload();
 };
 
@@ -102,11 +109,10 @@ function countdown(seconds) {
     countdownEl.style.transform = 'translate(-50%, -50%)';
     countdownEl.style.fontSize = '60px';
     countdownEl.style.fontFamily = '"Dancing Script", cursive';
-    countdownEl.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
 
     const interval = setInterval(() => {
       timeLeft--;
-      countdownEl.textContent = timeLeft > 0 ? timeLeft : '📸';
+      countdownEl.textContent = timeLeft > 0 ? timeLeft : '📸 Snap!';
       if (timeLeft <= 0) {
         clearInterval(interval);
         countdownEl.style.display = 'none';
