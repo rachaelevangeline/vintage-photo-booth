@@ -9,17 +9,20 @@ const startButton = document.getElementById('startButton');
 const customTextInput = document.getElementById('customText');
 
 const photoWidth = 320;
-const photoHeight = 240; // Maintain aspect ratio
+const photoHeight = 240;
 const padding = 20;
 const framePadding = 10;
 
+// Set canvas size to fit 3 photos + frame
 canvas.width = photoWidth + framePadding * 2;
-canvas.height = (photoHeight + padding) * 3 + framePadding * 2 + 80;
+canvas.height = (photoHeight + padding) * 3 + framePadding * 2 + 100;
 
+// Access webcam
 navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 } } })
   .then(stream => video.srcObject = stream)
   .catch(err => console.error('Error accessing webcam:', err));
 
+// Apply real-time filter effect
 filterSelect.addEventListener('change', () => {
   video.style.filter = filterSelect.value;
 });
@@ -29,26 +32,31 @@ startButton.onclick = async () => {
   const filter = filterSelect.value;
   const customText = customTextInput.value;
 
-  // Clear the canvas and apply frame color
+  // Clear the canvas with frame color
   ctx.fillStyle = frameColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.font = '20px "Dancing Script", cursive';
-  ctx.fillStyle = '#000000';
+  // Add beautiful frame border
+  ctx.strokeStyle = '#E4A6B0';
+  ctx.lineWidth = 8;
+  ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
+  // Capture 3 photos with countdown
   for (let i = 0; i < 3; i++) {
     await countdown(3);
 
     const yOffset = framePadding + i * (photoHeight + padding);
 
-    ctx.fillStyle = '#FFFFFF';
+    // Add white background for each photo
+    ctx.fillStyle = '#FFF';
     ctx.fillRect(framePadding, yOffset, photoWidth, photoHeight);
 
     ctx.save();
-    
-    // *** Apply the filter from the live camera ***
+
+    // Apply filter and capture image
     ctx.filter = filter;
-    
+
+    // Calculate perfect aspect ratio
     const aspectRatio = video.videoWidth / video.videoHeight;
     const targetAspectRatio = photoWidth / photoHeight;
 
@@ -65,17 +73,17 @@ startButton.onclick = async () => {
       sy = (video.videoHeight - sHeight) / 2;
     }
 
-    // Capture the live camera + filter and draw it
+    // Draw the image on canvas
     ctx.drawImage(video, sx, sy, sWidth, sHeight, framePadding, yOffset, photoWidth, photoHeight);
     ctx.restore();
   }
 
-  // Add the custom text at the bottom of the strip
+  // Add custom text at the bottom
   ctx.fillStyle = '#4A4A4A';
   ctx.font = '24px "Dancing Script", cursive';
-  ctx.fillText(customText, canvas.width / 2 - ctx.measureText(customText).width / 2, canvas.height - 20);
+  ctx.fillText(customText, canvas.width / 2 - ctx.measureText(customText).width / 2, canvas.height - 30);
 
-  // Prepare the downloadable photo strip
+  // Prepare downloadable strip
   prepareDownload();
 };
 
@@ -86,18 +94,19 @@ function countdown(seconds) {
     countdownEl.style.display = 'block';
     countdownEl.style.backgroundColor = '#E4A6B0';
     countdownEl.style.color = '#FFF';
-    countdownEl.style.padding = '10px 20px';
+    countdownEl.style.padding = '20px 40px';
     countdownEl.style.borderRadius = '50px';
     countdownEl.style.position = 'absolute';
     countdownEl.style.top = '50%';
     countdownEl.style.left = '50%';
     countdownEl.style.transform = 'translate(-50%, -50%)';
-    countdownEl.style.fontSize = '50px';
+    countdownEl.style.fontSize = '60px';
     countdownEl.style.fontFamily = '"Dancing Script", cursive';
+    countdownEl.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
 
     const interval = setInterval(() => {
       timeLeft--;
-      countdownEl.textContent = timeLeft > 0 ? timeLeft : '';
+      countdownEl.textContent = timeLeft > 0 ? timeLeft : '📸';
       if (timeLeft <= 0) {
         clearInterval(interval);
         countdownEl.style.display = 'none';
@@ -111,5 +120,8 @@ function prepareDownload() {
   const image = canvas.toDataURL('image/png');
   downloadLink.href = image;
   downloadLink.download = 'vintage_photo_strip.png';
-  downloadLink.textContent = 'Download Your Strip';
+  downloadLink.textContent = '✨ Download Your Photo Strip';
+  downloadLink.style.display = 'block';
+  downloadLink.style.textAlign = 'center';
+  downloadLink.style.marginTop = '20px';
 }
