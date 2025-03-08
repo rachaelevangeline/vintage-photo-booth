@@ -126,49 +126,55 @@ button:hover, #downloadLink:hover {
   animation: flash 0.5s ease-out;
 }
 
-/* Sticky Notes Section */
-.sticky-note-container {
-  text-align: center;
-  max-width: 900px;
-  margin: 40px auto;
-}
-
-#messageForm {
-  margin-bottom: 20px;
-}
-
-/* Input and Textarea */
-input[type="text"], textarea {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #E4A6B0;
-  border-radius: 15px;
-  font-family: 'Dancing Script', cursive;
-  font-size: 18px;
-  margin-bottom: 15px;
-  background-color: #FFF;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-/* Submit Button */
+/* Button Styling for "Leave a Message 💌" */
 button[type="submit"] {
   background-color: #E4A6B0;
   color: white;
   border: none;
-  padding: 12px 30px;
-  font-size: 18px;
+  padding: 14px 30px;
+  font-size: 20px;
   border-radius: 50px;
   cursor: pointer;
   font-family: 'Dancing Script', cursive;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
 }
 
+/* Hover Effect - Like a vintage envelope opening */
 button[type="submit"]:hover {
   background-color: #8C5B68;
   transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Sticky Notes Board */
+/* Add subtle 3D pop effect when clicked */
+button[type="submit"]:active {
+  transform: scale(0.98);
+  background-color: #4A4A4A;
+}
+
+/* Message Form Input Styling */
+input[type="text"], textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #E4A6B0;
+  border-radius: 12px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  margin-bottom: 20px;
+  background-color: #FFF7F0;
+  transition: all 0.3s ease;
+}
+
+/* Soft glow effect when typing */
+input[type="text"]:focus, textarea:focus {
+  border-color: #8C5B68;
+  background-color: #FDF1F4;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky Notes Board Styling */
 #stickyBoard {
   display: flex;
   flex-wrap: wrap;
@@ -176,7 +182,7 @@ button[type="submit"]:hover {
   gap: 20px;
 }
 
-/* Sticky Note */
+/* Cute Sticky Note Style */
 .sticky-note {
   background-color: #FDF1F4;
   border: 2px solid #E4A6B0;
@@ -188,17 +194,15 @@ button[type="submit"]:hover {
   font-size: 18px;
   position: relative;
   transform: rotate(-2deg);
-  transition: transform 0.3s;
+  transition: all 0.3s ease;
 }
 
-.sticky-note:hover {
-  transform: scale(1.05);
-}
-
+/* Cute Tilted Notes Effect */
 .sticky-note:nth-child(even) {
   transform: rotate(3deg);
 }
 
+/* Note Author (Name) Style */
 .note-author {
   display: block;
   font-size: 14px;
@@ -208,7 +212,7 @@ button[type="submit"]:hover {
   font-style: italic;
 }
 
-/* Polaroid Paper Effect */
+/* Polaroid Strip Vibe for Notes */
 .sticky-note:before {
   content: '';
   position: absolute;
@@ -221,7 +225,7 @@ button[type="submit"]:hover {
   transform: translateX(-50%);
 }
 
-/* Back Button */
+/* Cute Back Button */
 .back-btn {
   display: block;
   margin-top: 30px;
@@ -229,17 +233,11 @@ button[type="submit"]:hover {
   color: #8C5B68;
   font-size: 18px;
   font-family: 'Dancing Script', cursive;
-  border-bottom: 2px solid transparent;
   transition: all 0.3s ease;
 }
 
+/* Back Button Hover Effect */
 .back-btn:hover {
   color: #E4A6B0;
-  border-bottom: 2px solid #E4A6B0;
-}
-
-/* ADDING SOFT GLOW TO BUTTONS */
-button:active {
-  transform: scale(0.98);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
