@@ -12,39 +12,45 @@
   <h1>Vintage Photo Booth</h1>
   <p>Capture your elegant photo strip with a custom filter and frame.</p>
 
-  <div class="controls">
-    <label for="filterSelect">Filter:</label>
-    <select id="filterSelect">
-      <option value="none">None</option>
-      <option value="grayscale(100%)">Grayscale</option>
-      <option value="sepia(100%)">Sepia</option>
-      <option value="contrast(150%)">High Contrast</option>
-      <option value="brightness(120%)">Bright</option>
-    </select>
+  <div class="photo-booth-container">
+    <div class="camera-section">
+      <video id="video" autoplay playsinline></video>
+      <div id="countdown"></div>
+      <div class="controls">
+        <label for="filterSelect">Filter:</label>
+        <select id="filterSelect">
+          <option value="none">None</option>
+          <option value="grayscale(100%)">Grayscale</option>
+          <option value="sepia(100%)">Sepia</option>
+          <option value="contrast(150%)">High Contrast</option>
+          <option value="brightness(120%)">Bright</option>
+        </select>
 
-    <label for="frameColor">Frame Color:</label>
-    <input type="color" id="frameColor" value="#E4A6B0">
+        <label for="frameColor">Frame Color:</label>
+        <input type="color" id="frameColor" value="#E4A6B0">
 
-    <label for="customText">Custom Text:</label>
-    <input type="text" id="customText" placeholder="Your caption here...">
+        <label for="customText">Custom Text:</label>
+        <input type="text" id="customText" placeholder="Your caption here...">
 
-    <button id="startButton">Start Photo Session</button>
+        <button id="startButton">Start Photo Session</button>
+      </div>
+    </div>
+
+    <div class="strip-section">
+      <canvas id="stripCanvas"></canvas>
+      <a id="downloadLink">Download Your Strip</a>
+    </div>
   </div>
 
-  <div style="position: relative; display: inline-block;">
-    <video id="video" autoplay playsinline></video>
-    <div id="countdown"></div>
+  <div class="message-section">
+    <p>💌 Want to leave a sweet note for Rachael?</p>
+    <a href="message.html" class="message-button">Leave a Message 💌</a>
   </div>
-
-  <canvas id="stripCanvas"></canvas>
-
-  <a id="downloadLink">Download Your Strip</a>
 
   <footer>
     <p>© 2025 Vintage Photo Booth made by Rachael </p>
   </footer>
 
   <script src="script.js"></script>
-
 </body>
 </html>

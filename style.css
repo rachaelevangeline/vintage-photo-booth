@@ -2,8 +2,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #FFF7F0; /* Soft Cream */
-  color: #4A4A4A; /* Charcoal Gray */
+  background-color: #FFF7F0;
+  color: #4A4A4A;
   font-family: 'Dancing Script', cursive;
   display: flex;
   flex-direction: column;
@@ -17,14 +17,66 @@ h1, h2, h3, p {
   text-align: center;
 }
 
+/* Photo Booth Layout */
+.photo-booth-container {
+  display: flex;
+  max-width: 1200px;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.camera-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.strip-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Video and Canvas */
 #video {
-  width: 640px;
-  height: 480px;
+  width: 100%;
+  max-width: 500px;
+  height: 380px;
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Polaroid Flash Animation */
+@keyframes flash {
+  0% { opacity: 0.8; background-color: #fff; }
+  100% { opacity: 0; }
+}
+
+.flash-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0;
+  z-index: 10;
+  animation: flash 0.5s ease-out;
+}
+
+/* Polaroid Strip Animation */
+@keyframes slide-in {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.polaroid-strip {
+  animation: slide-in 1s ease-out;
 }
 
 /* Countdown */
@@ -33,7 +85,7 @@ h1, h2, h3, p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #E4A6B0; /* Dusty Rose */
+  background-color: #E4A6B0;
   color: #FFF;
   padding: 20px 40px;
   font-size: 80px;
@@ -43,47 +95,34 @@ h1, h2, h3, p {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Controls */
-.controls {
-  margin: 20px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
-
-button, select, input[type="color"] {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 30px;
-  font-size: 18px;
-  font-family: 'Dancing Script', cursive;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button {
-  background-color: #E4A6B0; /* Dusty Rose */
-  color: #FFF;
-}
-
-button:hover {
-  background-color: #8C5B68; /* Deep Mauve */
-}
-
-select, input[type="color"] {
-  background-color: #FFF;
-  border: 2px solid #E4A6B0;
-}
-
 /* Canvas (Photo Strip) */
 #stripCanvas {
-  margin-top: 30px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   border-radius: 20px;
   background-color: #FFF;
   padding: 10px;
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
-  border: 6px solid #E4A6B0; /* Frame color preview */
+  border: 6px solid #E4A6B0;
+}
+
+/* Add Flash Effect */
+.camera-section:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0;
+  z-index: 10;
+}
+
+.camera-section.capturing:after {
+  animation: flash 0.5s ease-out;
 }
 
 /* Download link */
@@ -103,99 +142,146 @@ select, input[type="color"] {
   background-color: #8C5B68;
 }
 
-/* Footer */
-footer {
-  margin-top: 50px;
-  padding: 20px 0;
+/* Polaroid effect on strip generation */
+#stripCanvas.polaroid {
+  animation: slide-in 1s ease-out;
+}
+
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFF7F0;
+  color: #4A4A4A;
+  font-family: 'Dancing Script', cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+h1, h2, h3, p {
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Photo Booth Layout */
+.photo-booth-container {
+  display: flex;
+  max-width: 1200px;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.camera-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.strip-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Sticky Notes Section */
+.sticky-note-container {
+  text-align: center;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+#messageForm {
+  margin-bottom: 20px;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #E4A6B0;
+  border-radius: 10px;
+  font-family: 'Dancing Script', cursive;
   font-size: 18px;
-  color: #8C5B68;
-}
-/* ====================
-   💌 Sticky Notes Page 
-   ==================== */
-   .container {
-    text-align: center;
-    max-width: 800px;
-    margin: 40px auto;
-    font-family: 'Dancing Script', cursive;
+  margin-bottom: 15px;
 }
 
-h1 {
-    font-size: 40px;
-    color: #8C5B68;
+button[type="submit"] {
+  background-color: #E4A6B0;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Dancing Script', cursive;
 }
 
-textarea {
-    width: 100%;
-    height: 100px;
-    border: 2px solid #E4A6B0;
-    padding: 10px;
-    margin-top: 10px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 18px;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #E4A6B0;
-    margin-bottom: 10px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 18px;
-}
-
-button {
-    background-color: #E4A6B0;
-    border: none;
-    color: white;
-    padding: 12px 25px;
-    font-size: 18px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: 'Dancing Script', cursive;
-}
-
-button:hover {
-    background-color: #8C5B68;
+button[type="submit"]:hover {
+  background-color: #8C5B68;
 }
 
 /* Sticky Notes Board */
 #stickyBoard {
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .sticky-note {
-    background-color: #FDF1F4;
-    border: 2px solid #E4A6B0;
-    padding: 15px;
-    border-radius: 10px;
-    width: 200px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
-    font-family: 'Dancing Script', cursive;
-    font-size: 18px;
+  background-color: #FDF1F4;
+  border: 2px solid #E4A6B0;
+  padding: 15px;
+  border-radius: 12px;
+  width: 220px;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  position: relative;
+  transform: rotate(-2deg);
+}
+
+.sticky-note:nth-child(even) {
+  transform: rotate(3deg);
 }
 
 .note-author {
-    display: block;
-    font-size: 14px;
-    color: #8C5B68;
-    margin-top: 10px;
+  display: block;
+  font-size: 14px;
+  color: #8C5B68;
+  margin-top: 10px;
+  text-align: right;
+  font-style: italic;
+}
+
+/* Polaroid Paper Effect */
+.sticky-note:before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 100px;
+  height: 10px;
+  background-color: #E4A6B0;
+  border-radius: 20px 20px 0 0;
+  transform: translateX(-50%);
 }
 
 /* Back Button */
 .back-btn {
-    display: block;
-    margin-top: 30px;
-    text-decoration: none;
-    color: #8C5B68;
-    font-size: 18px;
-    font-family: 'Dancing Script', cursive;
+  display: block;
+  margin-top: 30px;
+  text-decoration: none;
+  color: #8C5B68;
+  font-size: 18px;
+  font-family: 'Dancing Script', cursive;
 }
 
 .back-btn:hover {
-    color: #E4A6B0;
+  color: #E4A6B0;
 }
