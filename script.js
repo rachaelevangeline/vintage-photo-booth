@@ -29,6 +29,7 @@ startButton.onclick = async () => {
   const filter = filterSelect.value;
   const customText = customTextInput.value;
 
+  // Clear the canvas and apply frame color
   ctx.fillStyle = frameColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -43,14 +44,38 @@ startButton.onclick = async () => {
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(framePadding, yOffset, photoWidth, photoHeight);
 
-    // Draw filtered video frame to canvas
-    ctx.drawImage(video, framePadding, yOffset, photoWidth, photoHeight);
+    ctx.save();
+    
+    // *** Apply the filter from the live camera ***
+    ctx.filter = filter;
+    
+    const aspectRatio = video.videoWidth / video.videoHeight;
+    const targetAspectRatio = photoWidth / photoHeight;
+
+    let sx, sy, sWidth, sHeight;
+    if (aspectRatio > targetAspectRatio) {
+      sHeight = video.videoHeight;
+      sWidth = sHeight * targetAspectRatio;
+      sx = (video.videoWidth - sWidth) / 2;
+      sy = 0;
+    } else {
+      sWidth = video.videoWidth;
+      sHeight = sWidth / targetAspectRatio;
+      sx = 0;
+      sy = (video.videoHeight - sHeight) / 2;
+    }
+
+    // Capture the live camera + filter and draw it
+    ctx.drawImage(video, sx, sy, sWidth, sHeight, framePadding, yOffset, photoWidth, photoHeight);
+    ctx.restore();
   }
 
+  // Add the custom text at the bottom of the strip
   ctx.fillStyle = '#4A4A4A';
   ctx.font = '24px "Dancing Script", cursive';
   ctx.fillText(customText, canvas.width / 2 - ctx.measureText(customText).width / 2, canvas.height - 20);
 
+  // Prepare the downloadable photo strip
   prepareDownload();
 };
 
