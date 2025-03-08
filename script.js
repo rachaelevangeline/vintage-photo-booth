@@ -43,26 +43,8 @@ startButton.onclick = async () => {
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(framePadding, yOffset, photoWidth, photoHeight);
 
-    ctx.save();
-    ctx.filter = filter;
-    const aspectRatio = video.videoWidth / video.videoHeight;
-    const targetAspectRatio = photoWidth / photoHeight;
-
-    let sx, sy, sWidth, sHeight;
-    if (aspectRatio > targetAspectRatio) {
-      sHeight = video.videoHeight;
-      sWidth = sHeight * targetAspectRatio;
-      sx = (video.videoWidth - sWidth) / 2;
-      sy = 0;
-    } else {
-      sWidth = video.videoWidth;
-      sHeight = sWidth / targetAspectRatio;
-      sx = 0;
-      sy = (video.videoHeight - sHeight) / 2;
-    }
-
-    ctx.drawImage(video, sx, sy, sWidth, sHeight, framePadding, yOffset, photoWidth, photoHeight);
-    ctx.restore();
+    // Draw filtered video frame to canvas
+    ctx.drawImage(video, framePadding, yOffset, photoWidth, photoHeight);
   }
 
   ctx.fillStyle = '#4A4A4A';
