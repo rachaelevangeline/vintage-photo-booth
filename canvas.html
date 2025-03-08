@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photo Booth - Capture</title>
+  <meta name="description" content="Capture your elegant photo strip with a custom filter and frame at the Vintage Photo Booth.">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -14,8 +15,8 @@
 
   <div class="photo-booth-container">
     <div class="camera-section">
-      <video id="video" autoplay playsinline></video>
-      <div id="countdown"></div>
+      <video id="video" autoplay playsinline aria-label="Camera feed"></video>
+      <div id="countdown" aria-live="polite"></div>
       <div class="controls">
         <label for="filterSelect">Filter:</label>
         <select id="filterSelect">
@@ -32,25 +33,25 @@
         <label for="customText">Custom Text:</label>
         <input type="text" id="customText" placeholder="Your caption here...">
 
-        <button id="startButton">Start Photo Session</button>
+        <button id="startButton" title="Start the photo session">Start Photo Session</button>
       </div>
     </div>
 
     <div class="strip-section">
       <canvas id="stripCanvas"></canvas>
-      <a id="downloadLink">Download Your Strip</a>
+      <a id="downloadLink" download="photo_strip.png">Download Your Strip</a>
     </div>
   </div>
 
   <div class="message-section">
     <p>💌 Want to leave a sweet note for Rachael?</p>
-    <a href="message.html" class="message-button">Leave a Message 💌</a>
+    <a href="message.html" class="message-button" aria-label="Leave a message for Rachael">Leave a Message 💌</a>
   </div>
 
   <footer>
     <p>© 2025 Vintage Photo Booth made by Rachael </p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
