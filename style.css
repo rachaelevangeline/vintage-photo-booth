@@ -17,6 +17,63 @@ h1, h2, h3, p {
   text-align: center;
 }
 
+/* Home Page Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.home-container h1 {
+  font-size: 3.5rem;
+  color: #8C5B68;
+  margin-bottom: 10px;
+}
+
+.home-container h2 {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #E4A6B0;
+  margin-bottom: 30px;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #4A4A4A;
+  margin-bottom: 40px;
+}
+
+.home-container button {
+  background-color: #E4A6B0;
+  color: white;
+  border: none;
+  padding: 14px 35px;
+  font-size: 22px;
+  border-radius: 50px;
+  font-family: 'Dancing Script', cursive;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.home-container button:hover {
+  background-color: #8C5B68;
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.home-container footer {
+  margin-top: 50px;
+  font-size: 16px;
+  color: #999;
+}
+
 /* Photo Booth Layout */
 .photo-booth-container {
   display: flex;
@@ -99,7 +156,7 @@ h1, h2, h3, p {
   border: 6px solid #E4A6B0;
 }
 
-/* BUTTON DESIGN FIX */
+/* Button Design Fix */
 button, #downloadLink {
   background-color: #E4A6B0;
   color: white;
@@ -141,14 +198,12 @@ button[type="submit"] {
   letter-spacing: 1px;
 }
 
-/* Hover Effect - Like a vintage envelope opening */
 button[type="submit"]:hover {
   background-color: #8C5B68;
   transform: scale(1.05);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Add subtle 3D pop effect when clicked */
 button[type="submit"]:active {
   transform: scale(0.98);
   background-color: #4A4A4A;
@@ -167,7 +222,6 @@ input[type="text"], textarea {
   transition: all 0.3s ease;
 }
 
-/* Soft glow effect when typing */
 input[type="text"]:focus, textarea:focus {
   border-color: #8C5B68;
   background-color: #FDF1F4;
@@ -197,7 +251,6 @@ input[type="text"]:focus, textarea:focus {
   transition: all 0.3s ease;
 }
 
-/* Cute Tilted Notes Effect */
 .sticky-note:nth-child(even) {
   transform: rotate(3deg);
 }
@@ -236,7 +289,6 @@ input[type="text"]:focus, textarea:focus {
   transition: all 0.3s ease;
 }
 
-/* Back Button Hover Effect */
 .back-btn:hover {
   color: #E4A6B0;
   transform: scale(1.05);
